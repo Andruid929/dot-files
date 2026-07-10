@@ -14,7 +14,7 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 @Command(name = "save", description = "Save new config")
-public class NewEntryCommand extends CommandAction {
+public final class NewEntryCommand extends CommandAction {
 
     @Option(
             names = {"-k", "--key"},

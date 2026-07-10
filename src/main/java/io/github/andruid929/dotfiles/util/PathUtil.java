@@ -13,7 +13,7 @@ public final class PathUtil {
     @Contract("_ -> new")
     public static String @NotNull [] getPathAndFile(@NotNull Path path) {
         if (path.equals(Path.of(""))) {
-            return ""
+            return new String[]{};
         }
 
         String filename = path.getFileName().toString();

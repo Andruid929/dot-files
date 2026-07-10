@@ -1,15 +1,19 @@
 package io.github.andruid929.dotfiles;
 
 import io.github.andruid929.dotfiles.commands.NewEntryCommand;
+import io.github.andruid929.dotfiles.commands.PurgeCommand;
 import io.github.andruid929.dotfiles.defaults.FilePaths;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 
 @Command(
-        name = "Dotfiles",
+        name = "dotfiles",
         description = "Save and restore config files",
         version = "Dotfiles 1.0",
-        subcommands = {NewEntryCommand.class},
+        subcommands = {
+                NewEntryCommand.class,
+                PurgeCommand.class
+        },
         mixinStandardHelpOptions = true
 )
 public class Main implements Runnable {
@@ -18,7 +22,7 @@ public class Main implements Runnable {
         final var LOG_FILE_PATH_STRING = FilePaths.LOG_FILE.toString();
 
         final var LOG_PATTERN = "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n";
-        final var CONSOLE_LOG_PATTERN = "%d{HH:mm:ss} - %msg%n";
+        final var CONSOLE_LOG_PATTERN = "%msg%n";
 
         System.setProperty("LOG_FILE_PATH", LOG_FILE_PATH_STRING);
         System.setProperty("LOG_PATTERN", LOG_PATTERN);
@@ -37,6 +41,9 @@ public class Main implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Dotfiles: Save files");
+        System.out.println("Dotfiles: Save your configs");
+        System.out.println();
+        
+        main(new String[]{"-h"});
     }
 }
