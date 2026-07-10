@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+dependency-reduced-pom.xml
 
 ### IntelliJ IDEA ###
 .idea/
@@ -40,4 +41,5 @@ build/
 *.swp
 
 ### Andrew ###
-.temp
+*.temp
+*.noversion

@@ -1,2 +1,3 @@
-# dot-files
+# Dotfiles
+
 Create and store config files
