@@ -43,14 +43,17 @@ public final class NewEntryCommand extends CommandAction {
             String content = PathReader.readFile(fileToRead);
 
             if (content.isBlank()) {
-                LOGGER.info("I am unable");
+                LOGGER.info("I am unable to read");
 
                 return;
             }
 
             String[] fileAndPath = PathUtil.getPathAndFile(fileToRead);
 
-            Dotfile dotfile = new Dotfile(key, content, fileAndPath[0], fileAndPath[1]);
+            String fileLocation = fileAndPath[0];
+            String filename = fileAndPath[1];
+
+            Dotfile dotfile = new Dotfile(key, content, fileLocation, filename);
 
             Worker.addDotfile(dotfile);
 
@@ -65,9 +68,19 @@ public final class NewEntryCommand extends CommandAction {
 
     @Nullable
     private Path getFilePathToRead() {
-        Path pathToFile = Path.of(filePath);
+        String expandedPath = PathUtil.expandPath(filePath);
+
+        Path pathToFile = Path.of(expandedPath);
 
         if (Files.exists(pathToFile)) {
+
+            if (Files.isDirectory(pathToFile)) {
+                LOGGER.info("I'm called dotFILES not dotFOLDERS: '{}'", pathToFile);
+                LOGGER.error("Expected file, got directory: '{}'", pathToFile);
+
+                return null;
+            }
+
             return pathToFile;
         }
 

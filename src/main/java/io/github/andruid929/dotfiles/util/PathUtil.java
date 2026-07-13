@@ -4,6 +4,10 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
+import java.util.regex.Pattern;
+
+import io.github.andruid929.dotfiles.annotations.Blankable;
+import io.github.andruid929.leutils.wora.PathFinder;
 
 public final class PathUtil {
 
@@ -28,5 +32,33 @@ public final class PathUtil {
         }
 
         return new String[]{pathToFile, filename};
+    }
+
+    @Blankable
+    public static @NotNull String shortenPath(@NotNull String pathString) {
+        if (pathString.isBlank()) {
+            return pathString;
+        }
+
+        Path path = Path.of(pathString).normalize();
+
+        Path userHome = Path.of(PathFinder.USER_HOME).normalize();
+
+        if (path.startsWith(userHome)) {
+            Path relative = userHome.relativize(path);
+
+            return "~/" + relative.toString().replace("\\", "/");
+        }
+
+        return pathString;
+    }
+
+    @Blankable
+    public static @NotNull String expandPath(@NotNull String pathString) {
+        if (pathString.isBlank()) {
+            return pathString;
+        }
+
+        return pathString.replaceFirst(Pattern.quote("~"), PathFinder.USER_HOME);
     }
 }

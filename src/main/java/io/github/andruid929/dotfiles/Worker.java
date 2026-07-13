@@ -42,6 +42,10 @@ public final class Worker {
         serialise();
     }
 
+    public static Set<Dotfile> getLoadedDotfilesSet() {
+        return DOTFILES_SET;
+    }
+
     public static void serialise() {
         String json = JsonTransformer.serialiseToJsonString(DOTFILES_SET);
 

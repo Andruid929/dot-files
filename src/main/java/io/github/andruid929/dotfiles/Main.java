@@ -1,5 +1,6 @@
 package io.github.andruid929.dotfiles;
 
+import io.github.andruid929.dotfiles.commands.ListAllCommand;
 import io.github.andruid929.dotfiles.commands.NewEntryCommand;
 import io.github.andruid929.dotfiles.commands.PurgeCommand;
 import io.github.andruid929.dotfiles.defaults.FilePaths;
@@ -12,7 +13,8 @@ import picocli.CommandLine.Command;
         version = "Dotfiles 1.0",
         subcommands = {
                 NewEntryCommand.class,
-                PurgeCommand.class
+                PurgeCommand.class,
+                ListAllCommand.class
         },
         mixinStandardHelpOptions = true
 )
@@ -43,7 +45,7 @@ public class Main implements Runnable {
     public void run() {
         System.out.println("Dotfiles: Save your configs");
         System.out.println();
-        
+
         main(new String[]{"-h"});
     }
 }

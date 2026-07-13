@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -23,12 +22,9 @@ public final class PathReader {
     public static @NotNull @Blankable String readFile(Path filePath) {
         try {
 
-            byte[] fileBytes = Files.readAllBytes(filePath);
-
-            return new String(fileBytes, StandardCharsets.UTF_8);
+            return Files.readString(filePath);
         } catch (IOException e) {
 
-            LOGGER.error("Encountered error reading file '{}'", filePath);
             LOGGER.error("Stacktrace:", e);
 
             return "";

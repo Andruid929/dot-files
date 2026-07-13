@@ -9,6 +9,7 @@ import java.util.Objects;
 
 import io.github.andruid929.dotfiles.annotations.Blankable;
 import io.github.andruid929.dotfiles.errors.BlankValueException;
+import io.github.andruid929.dotfiles.util.PathUtil;
 
 public class Dotfile {
 
@@ -34,9 +35,9 @@ public class Dotfile {
         checkForBlanks(key, fileContents);
 
         this.key = key;
-        this.filename = filename;
         this.fileContents = fileContents;
-        this.filePath = filePath;
+        this.filePath = PathUtil.shortenPath(filePath);
+        this.filename = filename;
     }
 
     private void checkForBlanks(@NotNull String key, String fileContents) {
@@ -49,25 +50,13 @@ public class Dotfile {
         }
     }
 
-    public void setKey(@NotNull String key) {
-        this.key = key;
-    }
-
-    public void setFilename(@NotNull String filename) {
-        this.filename = filename;
-    }
-
-    public void setFileContents(@NotNull String fileContents) {
-        this.fileContents = fileContents;
-    }
-
-    public void setFilePath(@NotNull String filePath) {
-        this.filePath = filePath;
-    }
-
     @NotNull
     public String getKey() {
         return key;
+    }
+
+    public void setKey(@NotNull String key) {
+        this.key = key;
     }
 
     @NotNull
@@ -75,15 +64,27 @@ public class Dotfile {
         return filename;
     }
 
+    public void setFilename(@NotNull String filename) {
+        this.filename = filename;
+    }
+
     @NotNull
     public String getFileContents() {
         return fileContents;
+    }
+
+    public void setFileContents(@NotNull String fileContents) {
+        this.fileContents = fileContents;
     }
 
     @NotNull
     @Blankable
     public String getFilePath() {
         return filePath;
+    }
+
+    public void setFilePath(@NotNull String filePath) {
+        this.filePath = filePath;
     }
 
     @Override
