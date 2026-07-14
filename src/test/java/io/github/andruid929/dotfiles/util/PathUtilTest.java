@@ -1,10 +1,9 @@
 package io.github.andruid929.dotfiles.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.Test;
-
 import java.nio.file.Path;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import io.github.andruid929.leutils.wora.PathFinder;
 
@@ -38,7 +37,7 @@ class PathUtilTest {
     void expandPathTest() {
         String path = "~/name/is/andruid929";
 
-        String fullPath = Path.of(PathFinder.USER_HOME, "name/is/andruid929").toString();
+        String fullPath = Path.of(PathFinder.USER_HOME, "name", "is", "andruid929").toString();
 
         String expandedPath = PathUtil.expandPath(path);
 

@@ -1,9 +1,9 @@
 package io.github.andruid929.dotfiles.commands;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import org.jetbrains.annotations.Nullable;
 
 import io.github.andruid929.dotfiles.Dotfile;
 import io.github.andruid929.dotfiles.Worker;
@@ -16,18 +16,10 @@ import picocli.CommandLine.Option;
 @Command(name = "save", description = "Save new config")
 public final class NewEntryCommand extends CommandAction {
 
-    @Option(
-            names = {"-k", "--key"},
-            defaultValue = "",
-            required = true,
-            description = "The key for this file")
+    @Option(names = { "-k", "--key" }, required = true, description = "The key for this file")
     String key;
 
-    @Option(
-            names = {"-f", "--file"},
-            defaultValue = "",
-            required = true,
-            description = "Where the file is located")
+    @Option(names = { "-f", "--file" }, required = true, description = "Where the file is located")
     String filePath;
 
     @Override
@@ -43,7 +35,7 @@ public final class NewEntryCommand extends CommandAction {
             String content = PathReader.readFile(fileToRead);
 
             if (content.isBlank()) {
-                LOGGER.info("I am unable to read");
+                LOGGER.info("I am unable to read that file");
 
                 return;
             }
@@ -68,6 +60,13 @@ public final class NewEntryCommand extends CommandAction {
 
     @Nullable
     private Path getFilePathToRead() {
+        if (filePath.isBlank()) {
+            LOGGER.info("Use the '-f' flag to direct me to the file I should read");
+            LOGGER.error("File path is blank, cannot read file");
+
+            return null;
+        }
+
         String expandedPath = PathUtil.expandPath(filePath);
 
         Path pathToFile = Path.of(expandedPath);

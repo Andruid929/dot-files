@@ -1,10 +1,11 @@
 package io.github.andruid929.dotfiles;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import io.github.andruid929.dotfiles.io.IOUtil;
 import io.github.andruid929.dotfiles.io.PathReader;
@@ -24,7 +25,7 @@ public final class Worker {
         DOTFILES_SET.add(dotfile);
     }
 
-    public static boolean removeDotfile(String key) {
+    public static boolean removeDotfile(@NotNull String key) {
         return DOTFILES_SET.removeIf(dotfile -> dotfile.getKey().equals(key));
     }
 

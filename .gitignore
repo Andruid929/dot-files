@@ -4,7 +4,9 @@ target/
 !**/src/test/**/target/
 .kotlin
 dependency-reduced-pom.xml
+*UNDEFINED
 
+*.log.gz
 ### IntelliJ IDEA ###
 .idea/
 *.iws
