@@ -36,10 +36,12 @@ public final class PurgeCommand extends CommandAction {
 
         System.out.println();
 
-        System.out.println("Are you sure? (y/n)");
+        System.out.print("Are you sure? (y/n) -> ");
 
         try (Scanner scanner = new Scanner(System.in)) {
             String response = scanner.next().toLowerCase();
+
+            System.out.println();
 
             switch (response) {
                 case "y", "yes" -> {

@@ -1,5 +1,7 @@
 package io.github.andruid929.dotfiles.commands;
 
+import java.util.Scanner;
+
 import io.github.andruid929.dotfiles.Worker;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Parameters;
@@ -19,13 +21,33 @@ public final class RemoveEntryCommand extends CommandAction {
             return;
         }
 
-        boolean removed = Worker.removeDotfile(dotfileKey);
+        String confirmationMessage = "I hope it goes without saying that there's no Ctrl-Z for this operation";
 
-        if (removed) {
-            LOGGER.info("Successfully removed file with key '{}'", dotfileKey);
+        System.out.println(confirmationMessage);
+        System.out.print("Are you sure? (y/n) -> ");
 
-        } else {
-            LOGGER.info("No saved file found with key '{}'", dotfileKey);
+        try (Scanner scanner = new Scanner(System.in)) {
+            String response = scanner.next();
+
+            System.out.println();
+
+            switch (response.toLowerCase()) {
+
+                case "yes", "y", "yeah", "si" -> {
+                    boolean removed = Worker.removeDotfile(dotfileKey);
+
+                    if (removed) {
+                        LOGGER.info("Successfully removed file with key '{}'", dotfileKey);
+
+                    } else {
+                        LOGGER.info("No saved file found with key '{}'", dotfileKey);
+                    }
+                }
+
+                case "n", "no", "nope", "nah" -> LOGGER.info("Remove operation cancelled");
+
+                default -> LOGGER.info("It's a yes or no question but okay... goodbye");
+            }
         }
     }
 

@@ -1,11 +1,11 @@
 package io.github.andruid929.dotfiles;
 
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import io.github.andruid929.dotfiles.io.IOUtil;
 import io.github.andruid929.dotfiles.io.PathReader;
