@@ -4,7 +4,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
-import java.util.regex.Pattern;
 
 import io.github.andruid929.dotfiles.annotations.Blankable;
 import io.github.andruid929.leutils.wora.PathFinder;
@@ -59,6 +58,8 @@ public final class PathUtil {
             return pathString;
         }
 
-        return pathString.replaceFirst(Pattern.quote("~"), PathFinder.USER_HOME);
+        String fromUserHome = pathString.substring(2); //Remove the tilde and first slash
+
+        return PathFinder.createPathFromHomeRoot(fromUserHome).normalize().toString();
     }
 }
