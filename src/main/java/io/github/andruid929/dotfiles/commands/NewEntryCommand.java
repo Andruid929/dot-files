@@ -62,7 +62,7 @@ public final class NewEntryCommand extends CommandAction {
     private Path getFilePathToRead() {
         if (filePath.isBlank()) {
             LOGGER.info("Use the '-f' flag to direct me to the file I should read");
-            LOGGER.error("File path is blank, cannot read file");
+            LOGGER.error("File path is blank");
 
             return null;
         }
